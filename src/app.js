@@ -15,6 +15,7 @@ middlewareUser.validationEmail,
 middlewareUser.validationPassword,
 User.createUser);
 app.get('/user', validateToken, User.getAllUsers);
+app.get('/user/:id', validateToken, User.getUserId);
 
 // É importante exportar a constante `app`,
 // para que possa ser utilizada pelo arquivo `src/server.js`

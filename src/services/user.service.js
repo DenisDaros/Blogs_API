@@ -24,10 +24,16 @@ const getAllUsers = async () => {
   return users;
 };
 
+const getUserId = async (id) => {
+  const user = await User.findByPk(id, { attributes: { exclude: ['password'] } });
+  return user;
+};
+
 module.exports = {
   getByEmailPassword,
   getByUserId,
   getByEmail,
   createUser,
   getAllUsers,
+  getUserId,
 };
