@@ -34,6 +34,28 @@ const getByEmailPassword = async (req, res) => {
     }
   };
 
+  const createUser = async (req, res) => {
+    const { displayName, email, password, image } = req.body;
+    try {
+    const user = await UserService.getByEmail(email);
+
+    if (user) return res.status(409).json({ message: 'User already registered' });
+
+    const jwtConfig = {
+      expiresIn: '7d',
+      algorithm: 'HS256',
+    };
+
+    const token = jwt.sign({ data: { user: email } }, secret, jwtConfig);
+
+    await UserService.createUser({ displayName, email, password, image });
+    return res.status(201).json({ token });
+    } catch (error) {
+      res.status(500).json({ message: error.message });
+    }
+  };
+  
 module.exports = {
   getByEmailPassword,
+  createUser,
 };
