@@ -11,6 +11,15 @@ const CategoryService = require('../services/category.service');
     }
   };
   
+  const allCategories = async (req, res) => {
+    try {
+    const users = await CategoryService.allCategories();
+   return res.status(200).json(users);
+    } catch (e) {
+      res.status(500).json({ message: e });
+    }
+  };
 module.exports = {
     addCategory,
+    allCategories,
 };

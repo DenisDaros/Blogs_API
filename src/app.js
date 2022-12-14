@@ -21,6 +21,7 @@ app.get('/user', validateToken, User.getAllUsers);
 app.get('/user/:id', validateToken, User.getUserId);
 
 app.post('/categories', validateToken, middlewareCategory.validationName, Categories.addCategory);
+app.get('/categories', validateToken, Categories.allCategories);
 
 // É importante exportar a constante `app`,
 // para que possa ser utilizada pelo arquivo `src/server.js`
